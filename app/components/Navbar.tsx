@@ -48,7 +48,6 @@ export default function Navbar() {
         style={{ top: topValue }}
       >
         <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 md:py-7 relative z-50">
-          {/* Logo */}
           <div className="flex items-center space-x-2">
             <Link href="/">
               <Image
@@ -62,7 +61,6 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* Desktop Nav Links */}
           <ul className="hidden md:flex items-center space-x-8 font-medium text-gray-800">
             <li><Link href="#" className="hover:text-black transition-colors">Product</Link></li>
             <li><Link href="#" className="hover:text-black transition-colors">Pricing</Link></li>
@@ -90,17 +88,15 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* Desktop CTA */}
           <div className="hidden md:block">
-            <Link
-              href="#"
+            <a
+              href="https://app.rateshoppa.com"
               className="bg-[#084040] text-[#B6EA25] text-lg px-8 py-3 rounded-lg font-medium hover:bg-[#B6EA25] hover:text-[#084040] transition"
             >
               Login
-            </Link>
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden flex items-center justify-center w-10 h-10 text-gray-800 focus:outline-none relative z-50"
@@ -121,7 +117,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center px-6 py-6 border-b border-gray-200">
           <Link href="/">
             <Image
-              className="dark:invert w-[120px] h-auto"
+              className="dark:invert w-[180px] h-auto"
               src="/logo-dark.svg"
               alt="logo"
               width={150}
@@ -137,13 +133,11 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* Mobile Links */}
         <ul className="flex flex-col space-y-6 px-6 pt-8 text-gray-800 text-lg font-medium flex-1 overflow-y-auto">
           <li><Link href="#" className="block hover:text-black transition-colors">Product</Link></li>
           <li><Link href="#" className="block hover:text-black transition-colors">Pricing</Link></li>
           <li><Link href="#" className="block hover:text-black transition-colors">Case studies</Link></li>
 
-          {/* Mobile Dropdown */}
           <li>
             <button
               onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
@@ -165,14 +159,12 @@ export default function Navbar() {
           </li>
         </ul>
 
-        {/* Mobile Fixed Bottom CTA */}
         <div className="p-6 border-t border-gray-200">
-          <Link
-            href="#"
+          <a href="https://app.rateshoppa.com"
             className="block bg-[#084040] text-[#B6EA25] text-center px-6 py-3 rounded-lg font-medium hover:bg-[#B6EA25] hover:text-[#084040] transition"
           >
             Login
-          </Link>
+          </a>
         </div>
       </div>
     </>
