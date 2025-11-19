@@ -128,7 +128,7 @@ export default function Footer() {
           <Link href="#" className="text-white hover:text-[#B6EA25]" aria-label="Privacy policy">
             Privacy
           </Link>
-          <Link href="#" className="text-white hover:text-[#B6EA25]" aria-label="Cookie policy">
+          <Link href="/cookies" className="text-white hover:text-[#B6EA25]" aria-label="Cookie policy">
             Cookies
           </Link>
         </div>

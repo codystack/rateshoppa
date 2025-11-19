@@ -3,11 +3,13 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Bars3BottomRightIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3BottomRightIcon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 
 export default function Navbar() {
   const [isScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopDropdownOpen, setIsDesktopDropdownOpen] = useState(false);
+  const [isMobileDropdownOpen, setIsMobileDropdownOpen] = useState(false);
   const [screenWidth, setScreenWidth] = useState(0);
 
   // Detect screen size
@@ -63,7 +65,27 @@ export default function Navbar() {
             <li><Link href="/about" className="hover:text-black transition-colors">About us</Link></li>
             <li><Link href="/faq" className="hover:text-black transition-colors">FAQ</Link></li>
             <li><Link href="/contact" className="hover:text-black transition-colors">Contact us</Link></li>
-
+            <li className="relative">
+              <button
+                onClick={() => setIsDesktopDropdownOpen(!isDesktopDropdownOpen)}
+                className="hover:text-black flex items-center transition-colors"
+              >
+                Company
+                <ChevronDownIcon
+                  className={`ml-1 mt-0.5 h-4 w-4 transition-transform ${
+                    isDesktopDropdownOpen ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+              <div
+                className={`absolute left-0 mt-2 w-40 bg-white border border-gray-100 rounded-lg shadow-lg transition-all ${
+                  isDesktopDropdownOpen ? 'block opacity-100' : 'hidden opacity-0'
+                }`}
+              >
+                <Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-50 text-gray-700">About</Link>
+                <Link href="#" className="block px-4 py-2 text-sm hover:bg-gray-50 text-gray-700">Careers</Link>
+              </div>
+            </li>
           </ul>
 
           <div className="hidden md:block">
@@ -123,7 +145,7 @@ export default function Navbar() {
           <li><Link href="/faq" className="block hover:text-black transition-colors">FAQ</Link></li>
           <li><Link href="/contact" className="block hover:text-black transition-colors">Contact us</Link></li>
 
-          {/* <li>
+          <li>
             <button
               onClick={() => setIsMobileDropdownOpen(!isMobileDropdownOpen)}
               className="w-full flex justify-between items-center hover:text-black transition-colors"
@@ -141,7 +163,7 @@ export default function Navbar() {
               <li><Link href="#" className="block hover:text-black transition-colors">About</Link></li>
               <li><Link href="#" className="block hover:text-black transition-colors">Careers</Link></li>
             </ul>
-          </li> */}
+          </li>
         </ul>
 
         <div className="p-6 border-t border-gray-200">
