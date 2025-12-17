@@ -1,10 +1,11 @@
 /**
  * API Client Configuration
  * 
- * Centralized HTTP client for making requests to the backend API
+ * Centralized HTTP client for making API requests
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:7000';
+// Base URL for API requests - can be overridden via environment variable
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'https://rates-shoppa-backend.onrender.com';
 
 export interface ApiResponse<T> {
   success: boolean;
