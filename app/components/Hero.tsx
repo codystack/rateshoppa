@@ -1,9 +1,28 @@
 "use client";
 
 import Image from "next/image";
-import CurrencyExchangeCard from "./CurrencyExchangeCard";
+import CurrencyExchangeCardAPI from "./CurrencyExchangeCardAPI";
+import { Conversion } from "@/lib/api/conversions";
 
-export default function Hero() {
+interface HeroProps {
+  currencies: string[];
+  currenciesLoading: boolean;
+  currenciesError: string | null;
+  conversions: Conversion[];
+  conversionsLoading: boolean;
+  conversionsError: string | null;
+  onCurrencyChange: (from: string, to: string) => void;
+}
+
+export default function Hero({
+  currencies,
+  currenciesLoading,
+  currenciesError,
+  conversions,
+  conversionsLoading,
+  conversionsError,
+  onCurrencyChange,
+}: HeroProps) {
   return (
     <section className="relative h-full lg:h-[85vh] lg:py-0 py-10 flex items-center">
       <div className="absolute inset-0">
@@ -38,7 +57,15 @@ export default function Hero() {
         </div>
 
         <div className="relative px-8 py-8 w-full mx-auto lg:w-[500px] bg-white rounded-2xl">
-          <CurrencyExchangeCard />
+          <CurrencyExchangeCardAPI
+            currencies={currencies}
+            currenciesLoading={currenciesLoading}
+            currenciesError={currenciesError}
+            conversions={conversions}
+            conversionsLoading={conversionsLoading}
+            conversionsError={conversionsError}
+            onCurrencyChange={onCurrencyChange}
+          />
         </div>
       </div>
     </section>
