@@ -212,6 +212,7 @@ export default function CurrencyConverterInlineAPI({
   conversionsLoading = false,
   conversionsError = null,
   onCurrencyChange,
+  onAmountChange,
 }: {
   currencies?: string[];
   currenciesLoading?: boolean;
@@ -220,6 +221,7 @@ export default function CurrencyConverterInlineAPI({
   conversionsLoading?: boolean;
   conversionsError?: string | null;
   onCurrencyChange?: (from: string, to: string) => void;
+  onAmountChange?: (amount: number) => void;
 }) {
   const [amount, setAmount] = useState<number | "">(1);
   const [fromCurrency, setFromCurrency] = useState("USD");
@@ -242,6 +244,13 @@ export default function CurrencyConverterInlineAPI({
     }
   }, [fromCurrency, toCurrency, onCurrencyChange]);
 
+  // Notify parent when amount changes
+  useEffect(() => {
+    if (onAmountChange && typeof amount === 'number') {
+      onAmountChange(amount);
+    }
+  }, [amount, onAmountChange]);
+
   // Build currency list from prop data
   useEffect(() => {
     if (currencies && currencies.length > 0) {
@@ -249,7 +258,7 @@ export default function CurrencyConverterInlineAPI({
       currencies.forEach((code: string) => {
         list[code] = CURRENCY_NAMES[code] || code;
       });
-      console.log('📋 Built currency list from props:', list);
+      // console.log('📋 Built currency list from props:', list);
       setCurrencyList(list);
     }
   }, [currencies]);
