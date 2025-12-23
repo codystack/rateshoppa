@@ -20,6 +20,7 @@ export default function Home() {
   // Conversion rates state
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("EUR");
+  const [amount, setAmount] = useState<number>(1); // Amount being sent
   const [conversions, setConversions] = useState<Conversion[]>([]);
   const [conversionsLoading, setConversionsLoading] = useState(false);
   const [conversionsError, setConversionsError] = useState<string | null>(null);
@@ -28,12 +29,12 @@ export default function Home() {
   useEffect(() => {
     const fetchCurrencies = async () => {
       try {
-        console.log('🔄 [Page] Fetching currencies...');
+        // console.log('🔄 [Page] Fetching currencies...');
         setCurrenciesLoading(true);
         const response = await getCurrencies();
         
         if (response.success && response.data.currencies) {
-          console.log('✅ [Page] Currencies loaded:', response.data.currencies);
+          // console.log('✅ [Page] Currencies loaded:', response.data.currencies);
           setCurrencies(response.data.currencies);
           setCurrenciesError(null);
         } else {
@@ -54,12 +55,12 @@ export default function Home() {
   useEffect(() => {
     const fetchConversions = async () => {
       try {
-        console.log(`🔄 [Page] Fetching conversions for ${fromCurrency} → ${toCurrency}...`);
+        // console.log(`🔄 [Page] Fetching conversions for ${fromCurrency} → ${toCurrency}...`);
         setConversionsLoading(true);
         const response = await getConversionRates(fromCurrency, toCurrency);
         
         if (response.success && response.data.conversions) {
-          console.log('✅ [Page] Conversions loaded:', response.data.conversions);
+          // console.log('✅ [Page] Conversions loaded:', response.data.conversions);
           setConversions(response.data.conversions);
           setConversionsError(null);
         } else {
@@ -141,6 +142,9 @@ export default function Home() {
           setFromCurrency(from);
           setToCurrency(to);
         }}
+        onAmountChange={(newAmount) => {
+          setAmount(newAmount);
+        }}
       />
       <FlagMarquee />
       {/* Using API version */}
@@ -150,6 +154,7 @@ export default function Home() {
         conversionsError={conversionsError}
         fromCurrency={fromCurrency}
         toCurrency={toCurrency}
+        amount={amount}
       />
 
       {/* <RateComparisonTable providers={providers} /> */}

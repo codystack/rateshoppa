@@ -10,6 +10,7 @@ interface Props {
   conversionsError: string | null;
   fromCurrency: string;
   toCurrency: string;
+  amount: number;
 }
 
 export default function RateComparisonTableAPI({
@@ -18,11 +19,18 @@ export default function RateComparisonTableAPI({
   conversionsError,
   fromCurrency,
   toCurrency,
+  amount,
 }: Props) {
   // Calculate best rate (highest effective rate)
   const bestRate = conversions.length > 0
     ? Math.max(...conversions.map(c => c.effectiveRate))
     : 0;
+
+  // Format amount with commas
+  const formattedAmount = new Intl.NumberFormat('en-US', {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 2,
+  }).format(amount);
 
   return (
     <section id="rate-comparison-table" className="bg-[#f7f9f7] pb-20">
@@ -48,7 +56,7 @@ export default function RateComparisonTableAPI({
           <div>Transfer fee</div>
           <div>
             Recipient gets
-            <div className="text-xs opacity-70">Sending 1,000 {fromCurrency}</div>
+            <div className="text-xs opacity-70">Sending {formattedAmount} {fromCurrency}</div>
           </div>
         </div>
 
@@ -87,10 +95,16 @@ export default function RateComparisonTableAPI({
           <>
             {conversions.map((conversion, i) => {
               const isBest = conversion.effectiveRate === bestRate;
-              // Calculate recipient gets (1000 * rate - fee)
-              const recipientGets = (1000 * conversion.rate) - (conversion.transferFee.currency === fromCurrency ? conversion.transferFee.fee : 0);
+              // Calculate recipient gets using the dynamic amount
+              const recipientGets = (amount * conversion.rate) - (conversion.transferFee.currency === fromCurrency ? conversion.transferFee.fee : 0);
               // Determine if rate is good (within 5% of best rate)
               const rateGood = conversion.effectiveRate >= (bestRate * 0.95);
+              
+              // Format recipient gets with commas
+              const formattedRecipientGets = new Intl.NumberFormat('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              }).format(recipientGets);
 
               return (
                 <div
@@ -128,7 +142,7 @@ export default function RateComparisonTableAPI({
                   {/* Recipient gets */}
                   <div className="text-right">
                     <div className="font-semibold text-gray-900">
-                      {recipientGets.toFixed(2)} {toCurrency}
+                      {formattedRecipientGets} {toCurrency}
                     </div>
 
                     <a

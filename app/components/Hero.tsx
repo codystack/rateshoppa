@@ -12,6 +12,7 @@ interface HeroProps {
   conversionsLoading: boolean;
   conversionsError: string | null;
   onCurrencyChange: (from: string, to: string) => void;
+  onAmountChange: (amount: number) => void;
 }
 
 export default function Hero({
@@ -22,6 +23,7 @@ export default function Hero({
   conversionsLoading,
   conversionsError,
   onCurrencyChange,
+  onAmountChange,
 }: HeroProps) {
   return (
     <section className="relative h-full lg:h-[85vh] lg:py-0 py-10 flex items-center">
@@ -65,6 +67,7 @@ export default function Hero({
             conversionsLoading={conversionsLoading}
             conversionsError={conversionsError}
             onCurrencyChange={onCurrencyChange}
+            onAmountChange={onAmountChange}
           />
         </div>
       </div>
