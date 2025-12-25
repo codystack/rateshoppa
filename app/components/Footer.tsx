@@ -122,10 +122,10 @@ export default function Footer() {
         </div>
 
         <div className="flex items-center space-x-4">
-          <Link href="#" className="text-white hover:text-[#B6EA25]" aria-label="Terms of service">
+          <Link href="/terms" className="text-white hover:text-[#B6EA25]" aria-label="Terms of service">
             Terms
           </Link>
-          <Link href="#" className="text-white hover:text-[#B6EA25]" aria-label="Privacy policy">
+          <Link href="/privacy" className="text-white hover:text-[#B6EA25]" aria-label="Privacy policy">
             Privacy
           </Link>
           <Link href="/cookies" className="text-white hover:text-[#B6EA25]" aria-label="Cookie policy">
