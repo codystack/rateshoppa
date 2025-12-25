@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-export default function PrivacyPolicy() {
+export default function TermsAndConditions() {
   return (
     <div className="min-h-screen bg-white py-16 px-6 md:px-20 lg:px-40 text-gray-800">
         <h1 className="text-4xl font-bold mb-6">Terms and Conditions</h1>
